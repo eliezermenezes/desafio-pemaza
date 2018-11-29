@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.5.12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: 123qweasd
+    ports: 
+      - 8090:80
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8091:8080
+
+volumes:
+    db-data:
+

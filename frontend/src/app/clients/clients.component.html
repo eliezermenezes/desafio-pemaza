@@ -1,0 +1,79 @@
+<section class="jumbotron pb-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h5 class="text-muted">Bem vindo (a) ao</h5>
+        <h3 class="jumbotron-heading">Sistema TI</h3>
+      </div>
+      <div class="col-sm-6 text-right position-relative pt-3">
+        <button class="btn btn-outline-dark" [routerLink]="['/clientes/novo']">
+          Novo cadastro
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div *ngIf="loading">
+      <h6 class="text-center">
+        Aguarde um instante...
+      </h6>
+    </div>
+
+    <div *ngIf="!loading">
+      <div *ngIf="noResults; then noresult, else client"></div>
+
+      <ng-template #noresult>
+        <h6 class="text-center">
+          Nenhum resultado encontrado.
+        </h6>
+      </ng-template>
+
+      <ng-template #client>
+        <table class="table">
+          <thead class="thead-light">
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nome completo</th>
+            <th scope="col">Registro</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let client of clients">
+            <td> {{ client.code }} </td>
+            <td> {{ client.name }} </td>
+            <td>
+              <span *ngIf="client.register == 'active'" class="text-success font-weight-bold">
+                Ativo
+              </span>
+              <span *ngIf="client.register == 'inactive'" class="text-danger font-weight-bold">
+                Inativo
+              </span>
+            </td>
+            <td class="buttons-actions">
+              <button class="btn btn-outline-dark" (click)="edit(client)">
+                Editar
+              </button>
+              <button class="btn btn-outline-dark" (click)="remove(client)">
+                Excluir
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="col-lg-12 mt-5" *ngIf="showMessage">
+          <div class="col-md-8 offset-md-2">
+            <div class="alert alert-success feedback">
+              {{ message }}
+              <a class="text-uppercase font-weight-bold float-right" (click)="restore(idRestore)">Desfazer</a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

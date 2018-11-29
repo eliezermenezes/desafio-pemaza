@@ -1,0 +1,16 @@
+.feedback {
+  font-size: 14px;
+}
+
+.buttons-actions {
+  text-align: right;
+}
+
+.buttons-actions button {
+  margin-left: 20px;
+  padding: 2px 15px 2px;
+}
+
+.feedback a {
+  cursor: pointer;
+}
